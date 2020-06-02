@@ -34,6 +34,9 @@ ball.shape("square")
 ball.color("white") 
 ball.penup()
 ball.goto(0,0)
+ball.dx = 0.15
+ball.dy = 0.15
+
 
 # Funções
 
@@ -71,3 +74,14 @@ wn.onkeypress(paddle_b_down,"Down")
 #Loop principal do jogo
 while True:
 	wn.update()
+
+	# Movimento da bola
+
+	ball.setx(ball.xcor()+ball.dx)
+	ball.sety(ball.ycor()+ball.dy)
+
+	# confirir se enconstou na borda superior
+	if ball.ycor() > 290:
+		ball.sety(290)
+		# se tiver enconstado, o indice dy ficará negativo o que mudará o a direção do movimento para baixo
+		ball.dy *= -1
