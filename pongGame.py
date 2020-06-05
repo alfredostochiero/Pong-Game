@@ -34,8 +34,8 @@ ball.shape("square")
 ball.color("white") 
 ball.penup()
 ball.goto(0,0)
-ball.dx = 0.15
-ball.dy = 0.15
+ball.dx = -0.15
+ball.dy = -0.15
 
 
 # Funções
@@ -80,8 +80,34 @@ while True:
 	ball.setx(ball.xcor()+ball.dx)
 	ball.sety(ball.ycor()+ball.dy)
 
-	# confirir se enconstou na borda superior
+	# conferir se enconstou na borda superior
 	if ball.ycor() > 290:
 		ball.sety(290)
 		# se tiver enconstado, o indice dy ficará negativo o que mudará o a direção do movimento para baixo
 		ball.dy *= -1
+
+	# conferir se enconstou na borda inferior
+	if ball.ycor() < -290:
+		ball.sety(-290)
+		# se tiver enconstado, o indice dy ficará positivo o que mudará o a direção do movimento para cima
+		ball.dy *= -1	
+
+	# conferir se enconstou na lateral direita
+	if ball.xcor() > 390:
+		ball.goto(0,0)
+		ball.dx *= -1	
+
+	# conferir se enconstou na lateral esquerda
+	if ball.xcor() < -390:
+		ball.goto(0,0)
+		ball.dx *= -1	
+
+	#colisão entre a barra direita e a bola
+	if (ball.xcor() > 340 and ball.xcor()< 350)  and (ball.ycor()< paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -50):
+		ball.setx(340)
+		ball.dx *= -1	
+
+	#colisão entre a barra esquerda e a bola
+	if (ball.xcor() < -340 and ball.xcor() > -350)  and (ball.ycor()< paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -50):
+		ball.setx(-340)
+		ball.dx *= -1	
