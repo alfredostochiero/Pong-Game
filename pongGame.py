@@ -1,4 +1,5 @@
 import turtle
+import winsound
 
 wn = turtle.Screen()
 wn.title("Jogo de Pong ")
@@ -101,12 +102,14 @@ while True:
 		ball.sety(290)
 		# se tiver enconstado, o indice dy ficará negativo o que mudará o a direção do movimento para baixo
 		ball.dy *= -1
+		winsound.PlaySound("bounceBorder.wav", winsound.SND_ASYNC)
 
 	# conferir se enconstou na borda inferior
 	if ball.ycor() < -290:
 		ball.sety(-290)
 		# se tiver enconstado, o indice dy ficará positivo o que mudará o a direção do movimento para cima
-		ball.dy *= -1	
+		ball.dy *= -1
+		winsound.PlaySound("bounceBorder.wav", winsound.SND_ASYNC)	
 
 	# conferir se enconstou na lateral direita
 	if ball.xcor() > 390:
@@ -129,12 +132,14 @@ while True:
 	#colisão entre a barra direita e a bola
 	if (ball.xcor() > 340 and ball.xcor()< 350)  and (ball.ycor()< paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -50):
 		ball.setx(340)
-		ball.dx *= -1	
+		ball.dx *= -1
+		winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)	
 
 	#colisão entre a barra esquerda e a bola
 	if (ball.xcor() < -340 and ball.xcor() > -350)  and (ball.ycor()< paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -50):
 		ball.setx(-340)
-		ball.dx *= -1	
+		ball.dx *= -1
+		winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)	
 
 	
 
