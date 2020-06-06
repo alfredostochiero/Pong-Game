@@ -6,6 +6,11 @@ wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0)
 
+# Placar
+
+score_a = 0
+score_b = 0
+
 # Barra do jogador 1
 
 paddle_a =  turtle.Turtle()
@@ -34,8 +39,19 @@ ball.shape("square")
 ball.color("white") 
 ball.penup()
 ball.goto(0,0)
-ball.dx = -0.15
-ball.dy = -0.15
+ball.dx = -0.2
+ball.dy = -0.2
+
+# Placar_Inicial
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0,260)
+scoreSentence = "Jogador A: {} Jogador B: {}"
+pen.write(scoreSentence.format(score_a,score_b)  ,align="center",font=("Arial",24,"normal"))
 
 
 # Funções
@@ -96,11 +112,19 @@ while True:
 	if ball.xcor() > 390:
 		ball.goto(0,0)
 		ball.dx *= -1	
+		# Se enconstou na lateral direita, aumenta a pontuação do jogador A
+		score_a += 1
+		pen.clear() 
+		pen.write(scoreSentence.format(score_a,score_b)  ,align="center",font=("Arial",24,"normal"))
 
 	# conferir se enconstou na lateral esquerda
 	if ball.xcor() < -390:
 		ball.goto(0,0)
 		ball.dx *= -1	
+		# Se enconstou na lateral esquerda, aumenta a pontuação do jogador B
+		score_b += 1
+		pen.clear()
+		pen.write(scoreSentence.format(score_a,score_b)  ,align="center",font=("Arial",24,"normal"))
 
 	#colisão entre a barra direita e a bola
 	if (ball.xcor() > 340 and ball.xcor()< 350)  and (ball.ycor()< paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -50):
@@ -111,3 +135,6 @@ while True:
 	if (ball.xcor() < -340 and ball.xcor() > -350)  and (ball.ycor()< paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -50):
 		ball.setx(-340)
 		ball.dx *= -1	
+
+	
+
